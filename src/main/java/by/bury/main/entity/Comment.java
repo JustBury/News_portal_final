@@ -4,7 +4,6 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
@@ -22,19 +21,19 @@ public class Comment implements Serializable {
     @Column(name = "id")
     private int id;
 
-
-    @Column(name = "id_News")
-    private int idNews;
-
     @NotBlank(message = MESSAGE_INVALID_CONTENT)
     @Pattern(regexp = "(.){1,300}", message = MESSAGE_INVALID_CONTENT)
     @Column(name = "content")
     private String content;
 
     @Column(name = "publish_date",updatable = false)
+
     @CreationTimestamp
     private Date publishDate;
 
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.DETACH,CascadeType.MERGE,CascadeType.REFRESH})
+    @JoinColumn(name = "id_News")
+    private News news;
 
     public Comment() {
     }
@@ -45,14 +44,6 @@ public class Comment implements Serializable {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getIdNews() {
-        return idNews;
-    }
-
-    public void setIdNews(int idNews) {
-        this.idNews = idNews;
     }
 
     public String getContent() {
@@ -71,13 +62,20 @@ public class Comment implements Serializable {
         this.publishDate = publishDate;
     }
 
+    public News getNews() {
+        return news;
+    }
+
+    public void setNews(News news) {
+        this.news = news;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Comment сomment = (Comment) o;
         return id == сomment.id
-                && idNews == сomment.idNews
                 && Objects.equals(content, сomment.content)
                 && Objects.equals(publishDate, сomment.publishDate);
     }
@@ -87,7 +85,6 @@ public class Comment implements Serializable {
         final int prime = 43;
         int result = 1;
         result = prime * result + id;
-        result = prime * result + idNews;
         result = prime * result + ((content == null) ? 0 : content.hashCode());
         result = prime * result + ((publishDate == null) ? 0 : publishDate.hashCode());
         return result;
@@ -97,7 +94,6 @@ public class Comment implements Serializable {
     public String toString() {
         return getClass().getName() + '@'
                 +  " Id=" + id +
-                ", idNews=" + idNews +
                 ", content='" + content +
                 ", publishDate=" + publishDate ;
     }

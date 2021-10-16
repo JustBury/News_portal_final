@@ -41,8 +41,7 @@ public class News implements Serializable {
     @CreationTimestamp
     private Date publishDate;
 
-    @OneToMany(cascade = CascadeType.REMOVE,fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_News")
+    @OneToMany(mappedBy = "news",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private List<Comment> comments;
 
     public News() {
@@ -134,7 +133,6 @@ public class News implements Serializable {
                 + " Id: " + id
                 + ", title: " + title
                 + ", brief: " + brief
-                + ", publishDate: " + publishDate
-                + ", comments: " + comments;
+                + ", publishDate: " + publishDate;
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
 @Controller
@@ -78,13 +79,16 @@ public class NewsController {
     }
 
     @PostMapping("/saveComment")
-    public String saveComment(@Valid @ModelAttribute(COMMENT) Comment comment, BindingResult bindingResult) {
+    public String saveComment(@Valid @ModelAttribute(COMMENT) Comment comment,
+                              BindingResult bindingResult,
+                              @RequestParam(NEWS_ID) int id) {
+        comment.setNews(newsService.getNews(1234));
+
         if (bindingResult.hasErrors()) {
-            return "redirect:/getNews/" + comment.getIdNews();
+            return "redirect:/getNews/" + comment.getNews().getId();
         }
-        System.out.println(comment.getIdNews());
         commentService.saveComment(comment);
-        return "redirect:/getNews/" + comment.getIdNews();
+        return "redirect:/getNews/" + comment.getNews().getId();
     }
 
     @RequestMapping("/deleteComment")
@@ -92,6 +96,11 @@ public class NewsController {
         commentService.deleteComment(idComment);
         return "redirect:/getNews/" + idNews;
     }
+
+//    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+//    public String handlerException(SQLIntegrityConstraintViolationException e) {
+//        return "error-page";
+//    }
 }
 
 

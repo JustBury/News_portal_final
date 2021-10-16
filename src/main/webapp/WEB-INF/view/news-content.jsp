@@ -67,21 +67,19 @@
 
 
     <c:url var="addNewComment" value="/saveComment">
-        <c:param name="idNews" value="${news.id}"/>
+        <c:param name="newsId" value="${news.id}"/>
     </c:url>
 
     <div class="form-area">
         <form:form action="${addNewComment}" modelAttribute="comment" method="post">
             <form:hidden path="id"/>
-
             <br>
             <label class="label-form">Leave a comment </label>
-            <form:errors cssStyle="color: red" path="content"/>
-            <br>
             <br>
             <form:textarea cssClass="form-textarea" path="content"/>
             <br>
-
+            <form:errors cssStyle="color: red" path="content"/>
+            <br>
 
             <input type="submit" class="submitOK" value="Save comment">
         </form:form>

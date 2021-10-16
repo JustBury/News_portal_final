@@ -44,7 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/deleteNews/**").hasAnyRole("ADMIN")
                 .and()
                 .formLogin()
-                .loginPage("/showMyLoginPage") // – the custom login page
+         //       .loginPage("/showMyLoginPage") // – the custom login page
                 .loginProcessingUrl("/authenticateTheUser") // – the URL to submit the username and password to
                 .permitAll()
 
