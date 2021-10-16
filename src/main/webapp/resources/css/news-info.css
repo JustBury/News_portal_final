@@ -1,0 +1,32 @@
+.form-area{
+    text-align: center;
+}
+.form-input{
+    padding:10px;
+    margin:10px 0;
+    border-radius:10px;
+    width:50%;
+}
+.form-textarea {
+    width:70%;
+    resize: vertical;
+    padding:15px;
+    border-radius:15px;
+    border:2px silver solid;
+    box-shadow:4px 4px 10px rgba(0,0,0,0.06);
+    height:150px;
+}
+.label-form{
+    font-size: 30px;
+    font-style: oblique;
+}
+.submitOK {
+    width:150px;
+    height:40px;
+    border-radius:20px;
+    background: #e2e2e2;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+}
+
