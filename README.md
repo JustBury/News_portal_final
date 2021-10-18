@@ -8,5 +8,10 @@ When trying to perform any action, a user will be directed to the authorization 
 
 The following functionality has been implemented:
 
-viewing all news (paging applied - 5 news on one page);\
-add news (only for administrator); read news; update and delete news (only for the administrator); comment news.
+- viewing all news;
+- add news;
+- read news;
+- update and delete news (only for the administrator);
+- comment news;
+- change user role;
+- delete user.
