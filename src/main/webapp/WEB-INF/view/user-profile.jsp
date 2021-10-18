@@ -1,14 +1,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
-
+    <title>User profile</title>
     <link rel="stylesheet" href="<c:url value="/resources/css/button_link.css"/>" type="text/css">
     <link rel="stylesheet" href="<c:url value="/resources/css/head_news.css"/>" type="text/css">
-    <link rel="stylesheet" href="<c:url value="/resources/css/registration_page.css"/>" type="text/css">
 </head>
 <body>
 <div class="header" id="header" style="overflow: hidden;">
@@ -28,11 +26,10 @@
 
     </div>
 </div>
-<br>
 
 <br>
 <div class="form-area">
-    <form:form action="saveUser" modelAttribute="user" method="post">
+    <form:form action="updateRoleUser" modelAttribute="user" method="post">
         <form:hidden path="id"/>
         <label class="label-form">User Name</label>
         <br>
@@ -58,12 +55,6 @@
         <br>
         <form:errors cssStyle="color: red" path="email"/>
         <br>
-        <label class="label-form">Password</label>
-        <br>
-        <form:password cssClass="form-input"  path="password"/>
-        <br>
-        <form:errors cssStyle="color: red" path="password"/>
-        <br>
         <form:select path="role">
             <form:options items="${user.getRoles()}"/>
         </form:select>
@@ -71,5 +62,7 @@
 
     </form:form>
 </div>
+
+
 </body>
 </html>

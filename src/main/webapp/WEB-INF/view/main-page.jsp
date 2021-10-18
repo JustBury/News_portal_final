@@ -25,6 +25,10 @@
             <c:url var="addNews" value="addNewNews"/>
             <a class="bot1" style="width: 100px" href="${addNews}">Add new News</a>
 
+            <sec:authorize access="hasRole('ADMIN')">
+            <c:url var="aminOffice" value="/admin/list-user"/>
+            <a class="bot1" style="width: 100px" href="${aminOffice}">Admin Office</a>
+            </sec:authorize>
         </div>
         <div style="float: left; width: 33%; height:  100%;">
             <sec:authorize access="!isAuthenticated()">

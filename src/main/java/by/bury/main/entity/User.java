@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 
 @Entity
@@ -51,14 +53,23 @@ public class User implements Serializable {
     private String password;
 
 
-    @Column(name = "role", insertable = false)
+    @Column(name = "role")
     private String role;
+
+    @Transient
+    private LinkedHashMap<String,String> roles;
 
     @Column(name = "date_registration", updatable = false)
     @CreationTimestamp
     private Date dateRegistration;
 
+
+
     public User() {
+        roles = new LinkedHashMap<String, String>();
+        roles.put(Role.ROLE_ADMIN.toString(), "Administrator");
+        roles.put(Role.ROLE_MODERATOR.toString(), "Moderator");
+        roles.put(Role.ROLE_GUEST.toString(), "Guest");
     }
 
     public int getId() {
@@ -117,7 +128,15 @@ public class User implements Serializable {
         this.dateRegistration = dateRegistration;
     }
 
-        public String getRole() {
+    public LinkedHashMap<String, String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(LinkedHashMap<String, String> roles) {
+        this.roles = roles;
+    }
+
+    public String getRole() {
         return role;
     }
 
